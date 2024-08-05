@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Config</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        select, textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Preview Config</h1>
+    <label for="configSelect">Config:</label>
+    <select id="configSelect">
+        <!-- Options will be populated dynamically -->
+    </select>
+    <div>
+        <button onclick="deleteConfig()">Delete</button>
+        <button onclick="viewConfig()">View</button>
+        <button onclick="loadConfig()">Load</button>
+    </div>
+    <textarea id="configPreview" readonly></textarea>
+</div>
+
+<script>
+    const configs = {
+        "config1.xml": "<config><setting>Value1</setting></config>",
+        "config2.xml": "<config><setting>Value2</setting></config>",
+        // Add more configs as needed
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const configSelect = document.getElementById('configSelect');
+        for (const config in configs) {
+            const option = document.createElement('option');
+            option.value = config;
+            option.textContent = config;
+            configSelect.appendChild(option);
+        }
+    });
+
+    function deleteConfig() {
+        const configSelect = document.getElementById('configSelect');
+        const selectedConfig = configSelect.value;
+        if (confirm(`Are you sure you want to delete ${selectedConfig}?`)) {
+            delete configs[selectedConfig];
+            configSelect.remove(configSelect.selectedIndex);
+            document.getElementById('configPreview').value = '';
+        }
+    }
+
+    function viewConfig() {
+        const configSelect = document.getElementById('configSelect');
+        const selectedConfig = configSelect.value;
+        document.getElementById('configPreview').value = configs[selectedConfig] || '';
+    }
+
+    function loadConfig() {
+        const configSelect = document.getElementById('configSelect');
+        const selectedConfig = configSelect.value;
+        alert(`Loading configuration: ${selectedConfig}`);
+        // Add logic to load the configuration as needed
+    }
+</script>
+
+</body>
+</html>
