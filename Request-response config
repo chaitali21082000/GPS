@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request and Response Config</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        select, button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #status {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Request and Response Config</h1>
+    <label for="requestConfig">Request Config:</label>
+    <select id="requestConfig">
+        <!-- Options will be populated dynamically -->
+    </select>
+    <label for="responseConfig">Response Config:</label>
+    <select id="responseConfig">
+        <!-- Options will be populated dynamically -->
+    </select>
+    <button onclick="submitConfig()">Submit</button>
+    <div id="status">Updated Successfully</div>
+</div>
+
+<script>
+    const configs = ["config1.xml", "config2.xml", "config3.xml"]; // Example configs
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const requestConfigSelect = document.getElementById('requestConfig');
+        const responseConfigSelect = document.getElementById('responseConfig');
+
+        configs.forEach(config => {
+            const option1 = document.createElement('option');
+            option1.value = config;
+            option1.textContent = config;
+            requestConfigSelect.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = config;
+            option2.textContent = config;
+            responseConfigSelect.appendChild(option2);
+        });
+    });
+
+    function submitConfig() {
+        const requestConfig = document.getElementById('requestConfig').value;
+        const responseConfig = document.getElementById('responseConfig').value;
+
+        // Perform the necessary actions with the selected configs
+        console.log(`Request Config: ${requestConfig}`);
+        console.log(`Response Config: ${responseConfig}`);
+
+        // Display status message
+        const statusDiv = document.getElementById('status');
+        statusDiv.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
